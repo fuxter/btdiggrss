@@ -1,3 +1,8 @@
+# use glob syntax.
+syntax: glob
+
+*.pyc
 bin
 include
 lib
+pip-selfcheck.json
