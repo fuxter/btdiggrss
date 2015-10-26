@@ -1,7 +1,5 @@
 #! /usr/bin/env python
 
-import pytz
-from datetime import datetime, timedelta
 
 import lxml.html
 import requests
@@ -34,10 +32,6 @@ class search:
             entry.id()
             entry.title(torrent.xpath('.//a')[0].text)
             entry.link(href=torrent.xpath('.//a')[0].get('href'))
-            entry.pubdate((
-                datetime.now(tz=pytz.utc).replace(hour=0, minute=0, second=0, microsecond=0)
-                - timedelta(float(torrent.xpath('.//table//span')[7].text.split()[0]))
-            ))
         web.header('Content-Type','application/rss+xml')
         return feed.rss_str()
 
