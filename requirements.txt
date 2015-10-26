@@ -1,0 +1,4 @@
+feedgen
+lxml
+requests
+web.py
