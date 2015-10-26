@@ -30,6 +30,8 @@ class search:
 
         for torrent in document.xpath('//table')[2].xpath('./tr'):
             url = torrent.xpath('.//a')[0].get('href')
+            if url == BTDIGG:
+                continue
             entry = feed.add_entry()
             entry.id(parse_qs(urlparse(url).query)['info_hash'][0])
             entry.title(torrent.xpath('.//a')[0].text)
