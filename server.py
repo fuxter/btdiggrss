@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+from urlparse import urlparse, parse_qs
 
 import lxml.html
 import requests
@@ -28,10 +29,12 @@ class search:
         feed.description(query)
 
         for torrent in document.xpath('//table')[2].xpath('./tr'):
+            url = torrent.xpath('.//a')[0].get('href')
             entry = feed.add_entry()
-            entry.id()
+            entry.id(parse_qs(urlparse(url).query)['info_hash'][0])
             entry.title(torrent.xpath('.//a')[0].text)
-            entry.link(href=torrent.xpath('.//a')[0].get('href'))
+            entry.link(href=url)
+
         web.header('Content-Type','application/rss+xml')
         return feed.rss_str()
 
