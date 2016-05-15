@@ -42,5 +42,7 @@ class search:
 
 
 if __name__ == "__main__":
+    import os, sys
+    sys.argv += (os.environ.get('PORT', 8080),)
     app = web.application(urls, globals())
     app.run()
